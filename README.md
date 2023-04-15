@@ -2,7 +2,10 @@
 # Modul 9: Tugas Besar
 
 ### Contributors
-Cantumkan nama kelompok dan anggota kelompok Anda di bagian ini.
+13221018 Gamaliel Adaran Nadiuarihon
+13221019 Jan Patrick Yeremia
+13221020 Vanny Alviolani Indriyani
+13221021 Hiradini Rahmah
 
 ### Deskripsi
 Jelaskan program Anda secara singkat di bagian ini.
