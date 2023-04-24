@@ -80,9 +80,10 @@ int main(){
     printf("\nPerbatasan markas Efektif: \n");
     printf("%s -> ", markas_awal.nama);
     while(hull != NULL){
-        printf("%s -> ", hull->markas.nama);
         if(hull->next == NULL){
             printf("%s\n", hull->markas.nama);
+        } else{
+            printf("%s -> ", hull->markas.nama);
         }
         Markas temp = hull->markas;
         hull = hull->next;
