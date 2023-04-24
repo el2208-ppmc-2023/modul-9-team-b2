@@ -39,7 +39,7 @@ int main(){
 
     fclose(stream);
     
-     // Mencari markas yang memiliki posisi paling bawah (bujur atau y paling rendah) dan mengurutkan array berdasarkan sudut yang dibentuk 
+    // Mencari markas yang memiliki posisi paling bawah (bujur atau y paling rendah) dan mengurutkan array berdasarkan sudut yang dibentuk 
     // secara counterclockwise terhadap markas yang paling bawah tersebut.
     sort_CC(data_markas, 20);
 
@@ -49,8 +49,10 @@ int main(){
     Stack* luar = (Stack*) malloc(sizeof(Stack));
     luar = NULL;
     double jarak = 0;
+    Markas markas_awal;
 
     push(&hull, &data_markas[0]);
+    markas_awal = hull->markas;
     push(&hull, &data_markas[1]);
 
     for(int j = 2; j < 20; j++){
@@ -65,11 +67,13 @@ int main(){
     }
 
     // Menampilkan hasil kepada pengguna.
-    printf("Markas Efektif: \n");
+    printf("Perbatasan markas Efektif: \n");
+    printf("%s -> ", markas_awal.nama);
     while(hull != NULL){
-        printf("Nama: %s\n", hull->markas.nama);
-        printf("Lintang: %f\n",hull->markas.posisi.x);
-        printf("Bujur: %f\n\n", hull->markas.posisi.y);
+        printf("%s -> ", hull->markas.nama);
+        if(hull->next == NULL){
+            printf("%s\n", hull->markas.nama);
+        }
         Markas temp = hull->markas;
         hull = hull->next;
         if(hull != NULL){
@@ -77,13 +81,12 @@ int main(){
         }
     }
 
-    printf("Jarak markas efektif: %f\n\n", jarak);
+    printf("\nPanjang Perbatasan Efektif Negara Api: %f km\n\n", jarak);
 
-    printf("Markas di luar: \n");
+    printf("Markas di Luar Perbatasan Efektif: \n"); int k = 1;
     while(luar != NULL){
-    printf("Nama: %s\n", luar->markas.nama);
-    printf("Lintang: %f\n",luar->markas.posisi.x);
-    printf("Bujur: %f\n\n", luar->markas.posisi.y);
+    printf("%d . %s\n", k, luar->markas.nama);
+    k++;
     luar = luar->next;
     }
 
