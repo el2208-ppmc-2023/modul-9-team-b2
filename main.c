@@ -38,3 +38,54 @@ int main(){
     }
 
     fclose(stream);
+    
+     // Mencari markas yang memiliki posisi paling bawah (bujur atau y paling rendah) dan mengurutkan array berdasarkan sudut yang dibentuk 
+    // secara counterclockwise terhadap markas yang paling bawah tersebut.
+    sort_CC(data_markas, 20);
+
+    // Melakukan Convex hull.
+    Stack* hull = (Stack*) malloc(sizeof(Stack));
+    hull = NULL;
+    Stack* luar = (Stack*) malloc(sizeof(Stack));
+    luar = NULL;
+    double jarak = 0;
+
+    push(&hull, &data_markas[0]);
+    push(&hull, &data_markas[1]);
+
+    for(int j = 2; j < 20; j++){
+        while(cross_product(next_top(hull).posisi,hull->markas.posisi,data_markas[j].posisi) <= 0){
+            hull = hull->next;
+        }
+        if(haversine(hull->markas.posisi.x, hull->markas.posisi.y, data_markas[j].posisi.x, data_markas[j].posisi.y) <= 2500){
+            push(&hull, &data_markas[j]);
+        } else {
+            push(&luar, &data_markas[j]);
+        }
+    }
+
+    // Menampilkan hasil kepada pengguna.
+    printf("Markas Efektif: \n");
+    while(hull != NULL){
+        printf("Nama: %s\n", hull->markas.nama);
+        printf("Lintang: %f\n",hull->markas.posisi.x);
+        printf("Bujur: %f\n\n", hull->markas.posisi.y);
+        Markas temp = hull->markas;
+        hull = hull->next;
+        if(hull != NULL){
+            jarak = jarak + haversine(hull->markas.posisi.x, hull->markas.posisi.y, temp.posisi.x, temp.posisi.y);
+        }
+    }
+
+    printf("Jarak markas efektif: %f\n\n", jarak);
+
+    printf("Markas di luar: \n");
+    while(luar != NULL){
+    printf("Nama: %s\n", luar->markas.nama);
+    printf("Lintang: %f\n",luar->markas.posisi.x);
+    printf("Bujur: %f\n\n", luar->markas.posisi.y);
+    luar = luar->next;
+    }
+
+    return 0;
+}
