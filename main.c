@@ -18,8 +18,18 @@ int main(){
     //Membaca file csv.
     Markas *data_markas;
     data_markas = (Markas*) malloc(sizeof(Markas));
+    char nama_file[max_char];
 
-    FILE* stream = fopen("D:\\SEMESTER 4\\PPMC\\markas.csv", "r");
+    printf("Masukkan nama file: ");
+    scanf("%s", nama_file);
+
+    FILE* stream = fopen(nama_file, "r");
+
+    // Verifikasi nama file 
+    if(stream == NULL){
+        printf("Eror : Tidak ada data di dalam file ini. Program selesai.");
+        return 0;
+    }
 
     // Memindahkan data dari file eksternal ke array.
     char line[255]; 
@@ -67,7 +77,7 @@ int main(){
     }
 
     // Menampilkan hasil kepada pengguna.
-    printf("Perbatasan markas Efektif: \n");
+    printf("\nPerbatasan markas Efektif: \n");
     printf("%s -> ", markas_awal.nama);
     while(hull != NULL){
         printf("%s -> ", hull->markas.nama);
