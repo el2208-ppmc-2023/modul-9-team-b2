@@ -66,7 +66,22 @@ double angle(Koordinat base, Koordinat point){
 
 // Fungsi untuk mengurutkan array bertipe markas berdasarkan sudutnya terhadap titik yang letatknya berada paling bawah. 
 // Urutan dimulai dari yang paling kecil menuju yang paling besar.
+void sort_CC(Markas* markas, int n){
+    int smallest_y = smallest_y_index(markas, n);
+    swap(&markas[0], &markas[smallest_y]);
 
+    for(int i = 1; i < n-1; i++){
+        double min = angle(markas[0].posisi, markas[i].posisi);
+        int idx_min = i;
+        for(int j = i+1; j < n-1; j++){
+            if(angle(markas[0].posisi, markas[j].posisi)<min){
+                min = angle(markas[0].posisi, markas[j].posisi);
+                idx_min = j;
+            }
+        }
+        swap(&markas[i],&markas[idx_min]);
+    }
+}
 
 // Fungsi untuk menambahkan elemen pada stack.
 void push(Stack** stack, Markas* markas){
