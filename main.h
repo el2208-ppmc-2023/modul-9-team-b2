@@ -81,3 +81,36 @@ void sort_CC(Markas* markas, int n){
         swap(&markas[i],&markas[idx_min]);
     }
 }
+
+
+// Fungsi untuk menambahkan elemen pada stack.
+void push(Stack** stack, Markas* markas){
+    Stack* new_element = (Stack*) malloc (sizeof(Stack));
+    new_element->markas = *markas;
+    new_element->next = *stack;
+    *stack = new_element;
+} 
+
+// Fungsi untuk mengambil elemen kedua dari atas sebuah stack.
+Markas next_top(Stack* stack){
+    return stack->next->markas;
+}
+
+// Fungsi untuk mengubah radian menjadi derajat.
+double to_radians(double degrees) {
+    return degrees * PI / 180.0;
+}
+
+// Fungsi untuk menghitung jarak menurut formula haversine.
+double haversine(double lat1, double lon1, double lat2, double lon2) {
+   double dlon, dlat, a, c, distance;
+
+    dlon = to_radians(lon2 - lon1);
+    dlat = to_radians(lat2 - lat1);
+
+    a = pow(sin(dlat / 2), 2) + cos(to_radians(lat1)) * cos(to_radians(lat2)) * pow(sin(dlon / 2), 2);
+    c = 2 * atan2(sqrt(a), sqrt(1 - a));
+    distance = rBumi * c;
+
+    return distance;
+}
