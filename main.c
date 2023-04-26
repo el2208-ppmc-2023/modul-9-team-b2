@@ -4,7 +4,7 @@
 *Hari dan Tanggal : 27 April 2023
 *Asisten (NIM) : Muhammad Daffa Rasyid (13220059)
 *Nama File : main.c
-*Deskripsi : Program yang dapat membaca lokasi markas negara api kemudian membuat perbatasan efektif seluas-luasnya
+*Deskripsi : Program yang dapat membaca lokasi markas negara api kemudian membuat perbatasan efektif seminimal mungkin
 dengan jarak antar markas tidak lebih dari 2500 km. Output nya adalah perbatasan efektif negara api dengan semua
 markas-markas yang menjadi batasnya, keliling perbatasan efektif, dan markas-markas negara api yang berada di luar
 perbatasan efektif.
