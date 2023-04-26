@@ -8,7 +8,7 @@
 - 13221021 Hiradini Rahmah
 
 ### Deskripsi
-Jelaskan program Anda secara singkat di bagian ini.
+Program ini meminta input nama file dari pengguna kemudian membuat perbatasan efektif semenimal mungkin dengan jarak antar markas tidak lebih dari 2500 km. Output nya adalah perbatasan efektif negara api dengan semua markas-markas yang menjadi batasnya, keliling perbatasan efektif, dan markas-markas negara api yang berada di luar perbatasan efektif.
 
 ### Kompilasi
 Program dapat dikompilasi dengan perintah berikut:
@@ -33,4 +33,4 @@ main.exe
 ```
 
 ### Panduan Penggunaan
-Jelaskan cara pengguna dapat menggunakan program Anda di bagian ini.
+Jalankan program lalu masukkan nama file csv yang berisikan data markas.
