@@ -1,7 +1,7 @@
 /*EL2208 Praktikum Pemecahan Masalah dengan C 2022/2023
 *Modul : 9 - Tugas Besar
 *Kelompok : B2
-*Hari dan Tanggal : 26 April 2023
+*Hari dan Tanggal : 27 April 2023
 *Asisten (NIM) : Muhammad Daffa Rasyid (13220059)
 *Nama File : main.c
 *Deskripsi : Program yang dapat membaca lokasi markas negara api kemudian membuat perbatasan efektif seluas-luasnya
@@ -49,6 +49,7 @@ int main(){
 
     fclose(stream);
     
+    // Validasi apakah elemen dari array cukup untuk membuat convex hull
     if (banyak_elemen-1 < 3){
         printf("Perbatasan efektif tidak bisa dibuat\n");
         return 0;
@@ -65,7 +66,6 @@ int main(){
     luar = NULL;
     double jarak = 0;
     Markas markas_awal;
-
 
     push(&hull, &data_markas[0]);
     markas_awal = hull->markas;
