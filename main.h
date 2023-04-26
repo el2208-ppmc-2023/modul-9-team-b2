@@ -1,7 +1,7 @@
 /*EL2208 Praktikum Pemecahan Masalah dengan C 2022/2023
 *Modul : 9 - Tugas Besar
 *Kelompok : B2
-*Hari dan Tanggal : 24 April 2023
+*Hari dan Tanggal : 27 April 2023
 *Asisten (NIM) : Muhammad Daffa Rasyid (13220059)
 *Nama File : main.h
 *Deskripsi : file yang berisikan deklarasi tipe data bentukan 
@@ -96,7 +96,7 @@ Markas next_top(Stack* stack){
     return stack->next->markas;
 }
 
-// Fungsi untuk mengubah radian menjadi derajat.
+// Fungsi untuk mengubah derajat menjadi radian.
 double to_radians(double degrees) {
     return degrees * PI / 180.0;
 }
