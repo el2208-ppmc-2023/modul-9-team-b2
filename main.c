@@ -1,7 +1,7 @@
 /*EL2208 Praktikum Pemecahan Masalah dengan C 2022/2023
 *Modul : 9 - Tugas Besar
 *Kelompok : B2
-*Hari dan Tanggal : 24 April 2023
+*Hari dan Tanggal : 26 April 2023
 *Asisten (NIM) : Muhammad Daffa Rasyid (13220059)
 *Nama File : main.c
 *Deskripsi : Program yang dapat membaca lokasi markas negara api kemudian membuat perbatasan efektif seluas-luasnya
@@ -26,8 +26,8 @@ int main(){
     FILE* stream = fopen(nama_file, "r");
 
     // Verifikasi nama file 
-    if(stream == NULL){
-        printf("Eror : Tidak ada data di dalam file ini. Program selesai.");
+      if (stream == NULL){
+        printf("File tidak dapat dibuka. Program Berakhir.");
         return 0;
     }
 
@@ -49,9 +49,14 @@ int main(){
 
     fclose(stream);
     
+    if (banyak_elemen-1 < 3){
+        printf("Perbatasan efektif tidak bisa dibuat\n");
+        return 0;
+    }
+
     // Mencari markas yang memiliki posisi paling bawah (bujur atau y paling rendah) dan mengurutkan array berdasarkan sudut yang dibentuk 
     // secara counterclockwise terhadap markas yang paling bawah tersebut.
-    sort_CC(data_markas, 20);
+    sort_CC(data_markas, banyak_elemen-1);
 
     // Melakukan Convex hull.
     Stack* hull = (Stack*) malloc(sizeof(Stack));
@@ -64,8 +69,9 @@ int main(){
     push(&hull, &data_markas[0]);
     markas_awal = hull->markas;
     push(&hull, &data_markas[1]);
+    push(&hull, &data_markas[2]);
 
-    for(int j = 2; j < 20; j++){
+    for(int j = 3; j < banyak_elemen-1; j++){
         while(cross_product(next_top(hull).posisi,hull->markas.posisi,data_markas[j].posisi) <= 0){
             hull = hull->next;
         }
@@ -77,7 +83,7 @@ int main(){
     }
 
     // Menampilkan hasil kepada pengguna.
-    printf("\nPerbatasan markas Efektif: \n");
+    printf("\nPerbatasan Efektif Negara Api: \n");
     printf("%s -> ", markas_awal.nama);
     while(hull != NULL){
         if(hull->next == NULL){
