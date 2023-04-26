@@ -15,7 +15,7 @@ perbatasan efektif.
 #include "main.h"
 
 int main(){
-    //Membaca file csv.
+    // Membaca file csv.
     Markas *data_markas;
     data_markas = (Markas*) malloc(sizeof(Markas));
     char nama_file[max_char];
@@ -25,7 +25,7 @@ int main(){
 
     FILE* stream = fopen(nama_file, "r");
 
-    // Verifikasi nama file 
+    // Verifikasi nama file.
       if (stream == NULL){
         printf("File tidak dapat dibuka. Program Berakhir.");
         return 0;
@@ -53,59 +53,3 @@ int main(){
         printf("Perbatasan efektif tidak bisa dibuat\n");
         return 0;
     }
-
-    // Mencari markas yang memiliki posisi paling bawah (bujur atau y paling rendah) dan mengurutkan array berdasarkan sudut yang dibentuk 
-    // secara counterclockwise terhadap markas yang paling bawah tersebut.
-    sort_CC(data_markas, banyak_elemen-1);
-
-    // Melakukan Convex hull.
-    Stack* hull = (Stack*) malloc(sizeof(Stack));
-    hull = NULL;
-    Stack* luar = (Stack*) malloc(sizeof(Stack));
-    luar = NULL;
-    double jarak = 0;
-    Markas markas_awal;
-
-    push(&hull, &data_markas[0]);
-    markas_awal = hull->markas;
-    push(&hull, &data_markas[1]);
-    push(&hull, &data_markas[2]);
-
-    for(int j = 3; j < banyak_elemen-1; j++){
-        while(cross_product(next_top(hull).posisi,hull->markas.posisi,data_markas[j].posisi) <= 0){
-            hull = hull->next;
-        }
-        if(haversine(hull->markas.posisi.x, hull->markas.posisi.y, data_markas[j].posisi.x, data_markas[j].posisi.y) <= 2500){
-            push(&hull, &data_markas[j]);
-        } else {
-            push(&luar, &data_markas[j]);
-        }
-    }
-
-    // Menampilkan hasil kepada pengguna.
-    printf("\nPerbatasan Efektif Negara Api: \n");
-    printf("%s -> ", markas_awal.nama);
-    while(hull != NULL){
-        if(hull->next == NULL){
-            printf("%s\n", hull->markas.nama);
-        } else{
-            printf("%s -> ", hull->markas.nama);
-        }
-        Markas temp = hull->markas;
-        hull = hull->next;
-        if(hull != NULL){
-            jarak = jarak + haversine(hull->markas.posisi.x, hull->markas.posisi.y, temp.posisi.x, temp.posisi.y);
-        }
-    }
-
-    printf("\nPanjang Perbatasan Efektif Negara Api: %f km\n\n", jarak);
-
-    printf("Markas di Luar Perbatasan Efektif: \n"); int k = 1;
-    while(luar != NULL){
-    printf("%d . %s\n", k, luar->markas.nama);
-    k++;
-    luar = luar->next;
-    }
-
-    return 0;
-}
